@@ -20,24 +20,30 @@
             <CollectionView.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <!-- PLaats hier de header velden voor de tabel-->
+                    <Label Grid.Column="0" Text="Nr" FontAttributes="Bold" />
+                    <Label Grid.Column="1" Text="Product" FontAttributes="Bold" />
+                    <Label Grid.Column="2" Text="Aantal verkocht" FontAttributes="Bold" />
+                    <Label Grid.Column="3" Text="Op voorraad" FontAttributes="Bold" />
                 </Grid>
             </CollectionView.Header>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:BestSellingProducts">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <!-- PLaats hier de datavelden voor de tabel-->
+                        <Label Grid.Column="0" Text="{Binding Ranking, StringFormat='#{0}'}" FontAttributes="Bold" />
+                        <Label Grid.Column="1" Text="{Binding ProductName}" />
+                        <Label Grid.Column="2" Text="{Binding NrOfSells}" />
+                        <Label Grid.Column="3" Text="{Binding Stock}" />
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
