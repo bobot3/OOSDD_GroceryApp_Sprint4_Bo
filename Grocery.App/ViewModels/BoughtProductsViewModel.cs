@@ -22,9 +22,33 @@ namespace Grocery.App.ViewModels
             Products = new(productService.GetAll());
         }
 
-        partial void OnSelectedProductChanged(Product? oldValue, Product newValue)
+        async partial void OnSelectedProductChanged(Product? oldValue, Product newValue)
         {
-            //Zorg dat de lijst BoughtProductsList met de gegevens die passen bij het geselecteerde product. 
+            if (newValue == null)
+            {
+                BoughtProductsList.Clear();
+                return;
+            }
+
+            try
+            {
+                var boughtProducts = await Task.Run(() => _boughtProductsService.Get(newValue.Id));
+
+                BoughtProductsList.Clear();
+
+                if (boughtProducts != null)
+                {
+                    foreach (var item in boughtProducts)
+                    {
+                        BoughtProductsList.Add(item);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"ERROR: {ex.Message}");
+                BoughtProductsList.Clear();
+            }
         }
 
         [RelayCommand]
